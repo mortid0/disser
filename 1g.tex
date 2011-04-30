@@ -1,39 +1,62 @@
 \section{Сравнение результатов численного моделирования с известными 
 аналитическими решениями многокомпонентного уравнения Смолуховского.}
 
-Известно 3 аналитических решения уравнения Смолуховского с монодисперсным начальным условием, $\phi_1(0) = \phi_0$.
-\begin{enumerate}
-\item В случае постоянного ядра, $K(x, y) = const = A$, решением системы будет 
-\begin{equation}
-\phi_k(t) = \phi_0 \frac{(\phi_0\,A\,t/2)^{k-1}}{(1+\phi_0\,A\,t/2)^{k+1}},
-\end{equation}
-Суммарную концентрацию частиц можно представить в виде:
-\begin{equation}
-\phi_c(t) = \sum_{k=1}^{\infty}\phi_k(t) = \frac{\phi_0}{1+\phi_0\,A\,t/2}
-\end{equation}
-Для удобства можно определить величину 
+Известные решения многокомпонентного уравнения Смолуховского аналогичны однокомпонентному аналогу. Без ограничения общности остановимся
+на двукомпонентном варианте. В этом случае ядро уравнения будет выглядеть следующим образом:
 $$
-\theta(t) = \frac{\phi_0}{\phi_c(t)} = 1 + \frac{\phi_0\, A\, t}{2}
+K(\vec x, \vec y) = K(x1, x2, y1, y2)
 $$
-\item Аналитическим решением для случая $K(x, y) = A\,(x + y)$ будет:
-\begin{equation}
-\phi_k(t) = \phi_0 \frac{k^{k-1}}{k!} e^{-\phi_0\,A\,t}(1 - e^{-\phi_0\,A\,t})^{k-1} e^{-k(1-e^{-\phi_0 A t})},
-\end{equation}
-Также можно показать, что
-\begin{equation}
-\theta(t) = \frac{\phi_0}{\phi_c(t)} = e^{\phi_0\,A\,t}
-\end{equation}
-\item Теоретическое решение уравнения Смолуховского для случая $K(x, y) = A \, x y$ необычно, так как за конечное время формируется суперкластер,
-который "вбирает" в себя все частицы. Отношение начальной концентрации части к текущей концентрации дается следующим выражением:
-\begin{equation}
-\theta(t) = \frac{\phi_0}{\sum_{i = 1}^{\infty}\phi_i} = \frac{1}{1 - \frac{\phi_0\,A\,t}{2}}, \qquad 0\le t < \frac{1}{\phi_0 A}
-\end{equation}
-\end{enumerate}
+Если ядро зависит только от суммарного количества частиц в кластере:
+$$
+K(x1, x2, y1, y2) = K(x1+y1, x2+y2)
+$$
+то аналитические решения уравнения Смолуховского с монодисперсным начальным условием, $\phi_i(0) = c_i$ выражаются через
+моменты распределения концентраций частиц:
+$$
+M_{i,j}(t) = \sum_{m=0}\sum_{n=0}m^i n^j \phi(m,n,t)
+$$
+Решения можно представлены в таблице \ref{tab_mom}.
+\begin{table}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccc}
+\hline
+Момент & K(x,y)=const & K(x,y) = x+y \\
+\hline
+$M_{0,0}$ & $\frac{2c_0}{T+2}$ & $c_0(1-\eta)$\\
+$M_{1,0}$ & $c_1$ & $c_2$\\
+$M_{0,1}$ & $c_1$ & $c_2$\\
+$M_{1,1}$ & $\frac{c_1 c_2}{c_0}T$ & $\frac{c_1 c_2 (2-\eta)\eta}{c_0(1-\eta)^2}$\\
+$M_{2,0}$ & $c_1\left( 1+ \frac{c_1}{c_0}T\right)$ & $c_1\left(1+ \frac{c_1(2-\eta)\eta}{c_0(1-\eta)^2}\right)$\\
+$M_{0,2}$ & $c_2\left( 1+ \frac{c_2}{c_0}T\right)$ & $c_2\left(1+ \frac{c_2(2-\eta)\eta}{c_0(1-\eta)^2}\right)$\\
+\hline
+\end{tabular*}
+\caption{Решения для начального условия $\phi(m, n, 0) = c_1\delta_{m,1}+c_2\delta_1,n$, $c_0 = c_1 + c_2$.}
+\label{tab_mom}
+\end{table}
 
-На рисунках представлены эволюции величины $\theta(t)$ для всех рассмотренных случаев.
+Параметры $\eta$ и $T$ определяются через решения для однокомпонентного случая:
+$$
+\eta = 1 - \exp(-c_0t)\qquad T = c_0 t
+$$
 
-\begin{figure}[h!]
-\includegraphics[width=0.85\textwidth]{plot_twocomp.pdf}
+На рисунках представлены эволюции моментов для всех рассмотренных случаев.
+\begin{figure}
+  \centering
+  \subfloat{\label{fig:tccm00}\includegraphics[width=0.5\textwidth]{plot_tc_const_m00.pdf}}                
+  \subfloat{\label{fig:tccm11}\includegraphics[width=0.5\textwidth]{plot_tc_const_m11.pdf}}\\
+  \subfloat{\label{fig:tccm02}\includegraphics[width=0.5\textwidth]{plot_tc_const_m02.pdf}}
+  \subfloat{\label{fig:tccm20}\includegraphics[width=0.5\textwidth]{plot_tc_const_m20.pdf}}
+  \caption{Моменты распределения концентрации кластеров для ядра $K(x,y) = 1$.}
+  \label{fig:moments_tcc}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \subfloat{\label{fig:tccm00}\includegraphics[width=0.5\textwidth]{plot_tc_sum_m00.pdf}}                
+  \subfloat{\label{fig:tccm11}\includegraphics[width=0.5\textwidth]{plot_tc_sum_m11.pdf}}\\
+  \subfloat{\label{fig:tccm02}\includegraphics[width=0.5\textwidth]{plot_tc_sum_m02.pdf}}
+  \subfloat{\label{fig:tccm20}\includegraphics[width=0.5\textwidth]{plot_tc_sum_m20.pdf}}
+  \caption{Моменты распределения концентрации кластеров для ядра $K(x,y) = x+y$.}
+  \label{fig:moments_tcs}
 \end{figure}
 
 

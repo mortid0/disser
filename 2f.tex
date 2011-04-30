@@ -1,2 +1,262 @@
 \section{Анализ соответствия весовой схемы моделирования коагуляции уравнению
 Больцмана.}
+
+Выведем уравнение эволюции одночастичных функций распределения, соответствующее предложенному алгоритму.
+
+
+Пусть функция $F_{\alpha 1 \alpha 2 ... \alpha n}(t, \eta_{\alpha 1}, ..., \eta_{\alpha n}, \vec c_{\alpha 1}, ..., 
+\vec c_{\alpha n})$ - совместная плотность распределения величин $(\eta_{\alpha 1}, \vec c_{\alpha 1}),
+(\eta_{\alpha 1}, \vec c_{\alpha 1}),...,(\eta_{\alpha 1}, \vec c_{\alpha 1})$, тогда по определению одночастичная функция распределения $f_{\alpha}(t, \vec c)$ равна:
+\begin{equation}
+f_{\alpha}(t, \vec c) = \sum_{i=1}^{N}\int \eta_{\alpha}^i F_{\alpha}(t, \eta_{\alpha}^i, \vec c) d\eta_{\alpha}^i = 
+N \int \eta_{\alpha} F_{\alpha}(t, \eta_{\alpha}, \vec c) d\eta_{\alpha}.
+\end{equation}
+Как следствие получаем равенство:
+$$
+\int f_{\alpha}(t, \vec c) d \vec c = N <\eta_{\alpha}> = n_{\alpha}
+$$
+
+Аналогично определяется двухчастичная функция распределения:
+\begin{align*}
+f_{\alpha 1 \alpha 2}(t, \vec c_{\alpha 1}, \vec c_{alpha 2})& = \sum_{i,j=1}^{N}\int \eta_{\alpha 1}^i \eta_{\alpha 2}^j 
+F_{\alpha 1 \alpha2}(t, \eta_{\alpha 1}^i, \eta_{\alpha 2}^j, \vec c_{\alpha 1}, \vec c_{\alpha 2}) d\eta_{\alpha 1}^i 
+d \eta_{\alpha 2}^j = \\
+&N^2 \int \eta_{\alpha 1} \eta_{\alpha 2} F_{\alpha 1 \alpha2}(t, \eta_{\alpha 1}, \eta_{\alpha 2}, \vec c_{\alpha 1}, 
+\vec c_{\alpha 2}) d\eta_{\alpha 1} d\eta_{\alpha 2}.
+\end{align*}
+
+В данных обозначениях гипотеза молекулярного хаоса имеет вид:
+$$
+F_{\alpha 1 \alpha 2}(t, \eta_{\alpha 1}, \eta_{\alpha 2}, \vec c_{\alpha 1}, vec c_{\alpha 2}) = F_{\alpha 1}
+(t, \eta_{\alpha 1}, \vec c_{\alpha 1}) F_{\alpha 2}(t, \eta_{\alpha 2}, \vec c_{\alpha 2})
+$$
+
+В смеси кластеров $(A_1, A_2, ..., A_S)$ из $S$ различных кластеров рассмотрим процесс коагуляции:
+$$
+A_l + A_m \rightarrow A_{l+m}
+$$
+При этом для простоты изложения, каждый кластер фиксированного размера будет представлен одной модельной частицей $N = 1$.
+
+В дальнейшем удобно использовать следующие обозначения:
+\begin{align*}
+&g_{lm} \sigma_{lm}^{l+m}(g_{lm}) \equiv k(g_{lm})\\
+&g_{lm} \sigma_{lm}^{(e)}(g_{lm}) \equiv k^{(e)}(g_{lm})\\
+&\underline \eta_{lm} = \min\{\eta_l, \eta_m\}\\
+&\overline \eta_{lm} = \max\{ \eta_l, \eta_m\}\\
+&\delta_{lm} = k \underline \eta / (k^{(e)} + k)\\
+\end{align*}
+Будем придерживаться, также, обозначений, использованных в работе\cite{Rykov1972}:
+\begin{align*}
+M_l = \frac{m_l}{m_l+m_m} &\text{ - относительная масса}\\
+G &\text{ - скорость центра инерции сталкивающихся частиц}\\
+m_{lm} = \frac{m_l m_m}{m_l + m_m} &\text{ - приведенная масса}\\
+Q_{lm} &\text{ - количество тепла, выделяемое при слипании}\\
+\chi(x) &\text{ - ступенчатая функция Хэвисайда}
+\end{align*}
+``Механическая'' модель неупругого взаимодействия допускает следующее схематическое изображение:
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.4\textwidth]{./fig/Chem_coll_vec.png}
+ % Chem_coll_vec.png: 2310x2450 pixel, 508dpi, 11.55x12.25 cm, bb=0 0 327 347
+ \caption{Модель неупругого взаимодействия}
+ \label{fig_chem_coll}
+\end{figure}
+
+
+При взаимодействии частиц $A_l$ и $A_m$ со скоростями $\vec c_l$ и $\vec c_m$ образуется частица $A_{l+m}$ со скоростью
+$\vec c_{l+m} \equiv G$.
+
+Пусть $P_{lm}^{l+m}$ - вероятность того, что в результате столкновения частиц $A_l$ и $A_m$ образуется частица $A_{l+m}$.
+Аналогично \cite{Rykov1972}, зададим данную вероятность следующим выражением:
+$$
+P_{lm}^{l+m} = p_{lm}^{l+m} \chi(\frac12 m_{lm}|(\vec c_l - \vec c_m)\vec k|^2 - E_{lm}^{l+m})
+$$
+где $p_{lm}^{l+m}$ - стерический фактор, а $E_{lm}^{l+m}$ - энергия активации, т.е. энергия, необходимая для слипания
+частиц $A_l$ и $A_m$.
+
+При моделировании химических реакций используются сечения химических превращений $\sigma_{lm}^{l+m}$. В рассматриваемой 
+модели сечения $\sigma_{lm}^{l+m}$ связаны с вероятностями $P_{lm}^{l+m}$ следующим соотношением:
+\begin{equation}
+g_{lm}\sigma_{lm}^{l+m}(g_{lm}) = \frac12 \left( \frac{d_l + d_m}{2}\right)^2 \int_{4 \pi} |\vec g_{lm} \vec k| P_{lm}^{l+m}d\vec k
+\end{equation}
+
+Вычисляя интеграл, получаем следующее выражение для сечения рассматриваемой модели:
+$$
+\sigma_{lm}^{l+m} =  \left\{ \begin{array}{ccc}
+ \pi \left( \frac{d_l + d_m}{2} \right)^2p_{lm}^{l+m} \left( 1 - \frac{2E_{lm}^{l+m}}{ m_{lm}g_{lm}^2}\right)
+&\text{, при }& E_{lm}^{l+m} < \frac12 m_{lm} g_{lm}^2\\
+ \\
+ 0 &\text{, при } & E_{lm}^{l+m} \geq \frac12 m_{lm}g_{lm}^2
+\end{array}
+\right.
+$$
+
+В дальнейшем будем использовать вспомогательную формулу:
+\begin{align*}
+ <\psi &(\eta_l,\eta_m, \eta_{l+m})\Psi(\vec c_l, \vec c_m, \vec c_{l+m})> \equiv
+\int \psi(\eta_l, \eta_m, \eta_{l+m}) \Psi(\vec c_l, \vec c_m, \vec c_{l+m})\times\\
+& \times F_{lm(l+m)}(t, \eta_l, \eta_m, 
+\eta_{l+m}, \vec c_l, \vec c_m, \vec c_{l+m}) d\eta_l \, d\eta_m \, \eta_{l+m} \, d\vec c_l \, d\vec c_m \,
+d\vec c_{l+m}
+\end{align*}
+В частном случае получаем:
+\begin{align*}
+<\eta &\delta(\eta - \eta_{l+m})\Psi(\vec c_l, \vec c_m)> = \int \eta \delta(\eta - \eta_{l+m}) \Psi(\vec c_l, 
+\vec c_m) \times\\
+& \times F_{(l+m)lm}(t, \eta_{l+m}, \eta_l, \eta_m, \vec c_{l+m}, \vec c_l, \vec c_m) d\eta_{l+m} \, d\eta_l\,
+d\eta_m \, d\vec c_{l+m} \, d\vec c_l \, d\vec c_m = \\
+& = < \eta_{l+m}\Psi(\vec c_l, \vec c_m)>
+\end{align*}
+
+Для сопоставления введенной модели уравнению Больцмана рассмотрим значение функции распределения $f_{l}$ в
+момент времени $t+\Delta t$. Алгоритм содержит в себе моделирование упругих и неупругих взаимодействий частиц.
+$$
+f_l(t+\Delta t, \vec c) - f_l(t, \vec c) = \Delta t \{ J_l^{(e)} + J_l^{(r)}\}
+$$
+Изменение $f_l$ на шаге $\Delta t$, вызванное упругими взаимодействиями, было исследовано в \S2. Здесь 
+ограничимся рассмотрением интегралов неупругих столкновений $J_l^{(r)} = J_{pq}^{+l} - J_{lm}^{-l}$,
+соответствующих предлагаемому алгоритму моделирования коагуляции.
+
+Рассматриваемые интегралы прямых и обратных столкновений имеют следующий смысл: $J_{lm}^{-l}$ - характеризует
+количество реальных кластеров, размером $l$, которые выбывают из-за неупругих столкновений с кластерами
+размера $m$. $J_{pq}^{+l}$ - дает количество реальных кластеров размера $l$, которые образуются в единице 
+фазового объема за единицу времени в результате реакций кластеров из $p$ и $q$ частиц, таких, что $p+q = l$.
+
+Рассмотрим условную плотность распределения величин $(\eta_l, \vec c_l)$ в момент времени $t+\Delta t$ при
+условии, что в момент $t$ все величины $(\eta_r, \vec c_r), r = 1,...,S$ - фиксированы. На данном шаге $\Delta t$
+возможны следующие несовместные события для всех возможных пар частиц $A_l$ и $A_m$:
+\begin{enumerate}
+ \item Взаимодействие $A_l + A_m \rightarrow A_{l+m}$ не произошло. Тогда искомая плотность равна: 
+$\Delta(\eta - \eta_l)\Delta(\vec c - \vec c_l)$. Вероятность этого события равна:
+$$
+P_1 = \{ 1 - \overline{\eta}[k^{(e)}(g_{lm}) + k(g_{lm})]\Delta t - \overline{\eta}[k^{(e)}(g_{(l+m)p}) + 
+k(g_{(l+m)p})]\Delta t \}
+$$
+\item Произошло слипание частиц сортов $l$ и $m$. Тогда скорость $\vec c_l$ не изменилась, а вес $\eta_l$
+уменьшился на $\delta_{lm}$. Следовательно условная плотность равна:
+$$
+\delta(\eta - \eta_l + \delta_{lm})\delta(\vec c - \vec c_l)
+$$
+Вероятность данного события равна:
+$$
+P2 = \overline{\eta_{lm}} [k^{(e)}(g_{lm}) + k(g_{lm})] \Delta t
+$$
+\item Произошло взаимодействие частиц $A_p$ и $A_q$, таких, что $p + q = l$. Тогда вес частицы $A_l$ увеличился
+на величину $\delta_{pq}$ и соответствующая условная плотность равна: $\delta(\eta - \eta_l - \delta_{pq})$.
+При этом скорость $\vec c_l$ может остаться неизменной или измениться на $\vec c_{pq}$. Вероятность первого 
+события равна $\eta_l / (\eta_l + \delta_{pq})$, вероятность второго: $\delta_{pq} / (\eta_l + \delta_{pq})$.
+Следовательно, условное распределение скорости частицы $A_l$ после взаимодействия всех частиц $A_p$ и $A_q$, 
+равно:
+$$
+\frac{\eta_l}{\eta_l + \sum_{i,j} \delta_{ij}[i+j=l]} \delta(\vec c - \vec c_l) + 
+\sum_{p,q} \frac{\delta_{pq}}{\eta_l + \sum_{i,j} \delta_{ij}[i+j=l]}\vec g_{pq} [p + q = l]
+$$
+Вероятность взаимодействия частиц $p$ и $q$ равна:
+$$
+P_3 = \eta_{pq}(k^{(e)}(g_{pq}) + k (g_{pq})) \Delta t
+$$
+\end{enumerate}
+Суммируя вероятности 1-3, получим:
+\begin{align*}
+P_{\Sigma}& = \Delta(\eta - \eta_l)\Delta(\vec c - \vec c_l) P1 +  
+ \delta(\eta - \eta_l + \delta_{lm})\delta(\vec c - \vec c_l)P_2 + \\
+& + \frac{\eta_l}{\eta_l + \sum_{i,j} \delta_{ij}[i+j=l]} \delta(\vec c - \vec c_l) + 
+\frac12 \sum_{p,q} \frac{\delta_{pq}}{\eta_l + \sum_{i,j} \delta_{ij}[i+j=l]}\vec g_{pq} [p + q = l]P_3
+\end{align*}
+Множитель $\frac12$ возникает в силу того, что пары столкновений приводящим к слипанию в сорт $l$ читаются дважды,
+отдельно по $p$ и отдельно по $q$.
+Чтобы получить распределение $F_l(t+\Delta t, \eta, \vec c)$ (без учета упругого взаимодействия)
+необходимо условную вероятность $P_{\Sigma}$ рандомизировать по всем возможным значениям переменных
+$\eta_l, \eta_m, \eta_p, \eta_q, \vec c_l, \vec c_m, \vec c_p, \vec c_q$ в момент времени $t$.
+
+Следовательно
+\begin{align*}
+ F_l & (t+\Delta t, \eta, \vec c) = \frac12 \sum_{p,q,m} \int P_{Sigma} F_{lmpq}(t, \eta_l, \eta_m, \eta_p, \eta_q,
+\vec c_l, \vec c_m, \vec c_p, \vec c_q)\times \\
+&\times d\eta_l\, d\eta_m\,d\eta_p\,d\eta_q\,d\vec c_l\,d\vec c_m\, d\vec c_p\, d\vec c_q[p+q = l]
+\end{align*}
+с учетом(2.3.1) при $N = 1$ и (2.3.5) получаем:
+\begin{align*}
+ f_l(&t+\Delta t, \vec c) = \sum_{p,q,m} \int \eta P_{\Sigma}F_{lmpq}(t, \eta_l, \eta_m, \eta_p, \eta_q,
+\vec c_l, \vec c_m, \vec c_p, \vec c_q)\times \\
+&\times d\eta_l\, d\eta_m\,d\eta_p\,d\eta_q\,d\vec c_l\,d\vec c_m\, d\vec c_p\, d\vec c_q[p+q = l] =
+\sum_{p,q,m} \int \eta <P_{\Sigma}> d \eta [p+q=l]
+\end{align*}
+Учитывая входящие сюда $\delta$-функции, получим (здесь используется формула $\int \eta \delta(\eta 
+- \eta_0)\delta(\vec c - \vec c_1) \Phi(\eta, \vec c_1) d \eta d\vec c_1 = \eta_0 \Phi(\eta_0, \vec c)$):
+\begin{align*}
+f_l&(t+\Delta t, \vec c) = f_l(t, \vec c) - \sum_{m}\Delta t <\eta_l \overline \eta_{lm}[k^{(e)}(|\vec c - \vec c_m|)\\
+& + k(|\vec c - \vec c_m|)]> - \frac12 \Delta t\sum_{p,q}\eta_l \overline \eta_{pq} \delta(\vec c -\vec c_l)(k^{(e)}(g_{pq}) +\\
+& + k(g_{pq}))[p+q=l]> + \Delta t \sum_{m}<(\eta_l - \delta_{lm})\overline \eta_{lm}(k^{(e)}(|\vec c - \vec c_m|)+\\
+& + k(|\vec c - \vec c_m|))> + \frac12 \Delta t \sum_{p,q} <(\eta_l + \delta_{pq}) \overline \eta_{pq} k^{(e)}(g_{pq})
++ k(g_{pq}))\times\\
+&\times(\frac{\eta_l}{\eta_l + \sum_{i,j}\delta_{ij}[i+j=l]}\delta(\vec c - \vec c_l) + 
+\frac{\delta_{pq}}{\eta_l+\sum_{i,j}\delta_{ij}[i+j=l]})>[p+q=l]
+\end{align*}
+
+После упрощений, суммируя по всем $m, p$ и $q$ получаем:
+\begin{align*}
+ \left( \frac{\Delta f_l^{(r)}}{\Delta t} \right) &= \sum_{p, q, m}<\overline \eta_{pq} \underline \eta_{pq}
+k(g_{pq})\delta(\vec c - \vec c_{pq}>[p+q=l] - \\
+&<\underline \eta_{lm} \overline \eta_{lm} k(|\vec c_l - \vec c_m|)\delta(\vec c - \vec c_l)> = J_{pq}^{+l} - J_{lm}^{-l}
+\end{align*}
+
+Заметим, что $\underline \eta_{lm} \overline \eta_{lm} = \eta_l \eta_m$.
+
+
+Рассмотрим величины $J_{pq}^{+l}$ и $J_{lm}^{-l}$. Из (2.3.2) получаем:
+\begin{align*}
+ J_{lm}^{-l}& = \sum_{m}<\eta_l \eta_m k(|\vec c_l - \vec c_m|)\delta(\vec c - \vec c_l) = \\
+& \sum_{m}\int \eta_l \eta_m |\vec c_l - \vec c_m| \sigma_{lm}^{l+m}(|\vec c_l - \vec c_m|) \delta (\vec c - \vec c_l) 
+F_{lm}(t, \eta_l, \eta_m, \vec c_l, \vec c_m) \times \\
+&\times d \eta_l\,d \eta_m \, d\vec c_l \, d \vec c_m = \sum_{m} \int |\vec c - \vec c_m| \sigma_{lm}^{l+m}(|\vec c - \vec c_m|)
+f_{lm}(t, \vec c, \vec c_m) d \vec c_m
+\end{align*}
+
+Аналогично:
+\begin{align*}
+ J_{pq}^{+l}& = \frac12 \sum_{p,q} <\eta_p \eta_q k(g_{pq})\delta(\vec c - \vec g_{pq})>[p+q = l]\\
+& \sum_{pq} \int \int \eta_p \eta_q g_{pq}\sigma_{pq}^{l}(g_{pq}) \delta(\vec c - \vec g_{pq}) \times\\
+& \times F_{pq}(t, \eta_p, \eta_q, \vec c_p, \vec c_q) d\eta_p\, d\eta_q\, d\vec c_p\, d\vec c_q [p+q=l] = \\
+& \sum_{p,q} \int \int f_{pq}(t, \vec c_p, \vec c_q) g_{pq} \sigma_{pq}^{l}(g_{pq}) \delta(\vec c - \vec g_{pq}) d \vec c_p \,d\vec c_q
+\end{align*}
+
+Данный интеграл рассматривался в работе \cite{Rykov1972}, и его можно привести к виду:
+\begin{align*}
+  J_{pq}^{+l}& = \sum_{p,q} \frac12 \left(\frac{d_p+d_q}{2}\right)^2 \int \int \int f_{pq}(t, \vec c_p, \vec c_q)|g_{pq}|\times\\
+&P_{pq}^{l} \delta (\vec c - \vec g_{pq}) d\vec c_p\, d\vec c_q[p+q=l]
+\end{align*}
+В \cite{Rykov1972} было доказано, что для фиксированных $l, p, q$:
+\begin{align*}
+  J_{pq}^{+l}& = \sum_{p,q} \frac14 \left(\frac{d_p+d_q}{2}\right)^2 \int \int \int \lambda_{pq}^{l}f_{pq}(t, \vec c_p, \vec c_q)
+|\vec g_{pq}| P_{pq}^{l}\\
+&\lambda_{pq}^{l} = \left(\frac{m_l}{m_p m_q}\right)^3
+\end{align*}
+
+Переходя от $P_{pq}^l$ к $\sigma_{pq}^{l}$ с помощью (2.3.3), получаем:
+$$
+J_{pq}^{+l} = \frac12 \int \lambda_{pq}^{l}f_{pq}(t, \vec c_p, \vec c_q) g_{pq} d\sigma_{pq}^l d\vec c_m
+$$
+
+Таким образом, суммируя по всем возможным $m, p$ и $q$, окончательно получаем:
+\begin{align*}
+ J_{pq}^{+l} - J_{lm}^{-l} = \sum_{m, p, q} \int (\frac12 \lambda_{pq}^{l}f_{pq}(t, \vec c_p, \vec c_q)[p+q=l] - f_{lm}(t, \vec c_l, \vec c_m))g_{lm}d \sigma_{pq}^l d\vec c_m
+\end{align*}
+
+С учетом упругих столкновений полное изменение функции распределения имеет вид:
+\begin{align*}
+ \frac{\delta f_l}{\Delta t}& = \sum_{m}\int(f_{lm}(\vec c_l^{'},\vec c_m^{'}) - f_{lm}(\vec c_l, \vec c_m))g_{lm}\sigma_{lm}^{(e)}d \vec c_m +\\
+&+ \sum_{m, p, q} \int (\frac12 \lambda_{pq}^{l}f_{pq}(\vec c_p, \vec c_q) - f_{lm}(\vec c_l, \vec c_m)) g_{lm}\sigma_{lm}^{pq}d \vec c_m
+\end{align*}
+
+Данное выражение совпадает с уравнением Больцмана с точностью до разностной аппроксимации производной $d/dt$ и ошибки от величины статистической
+зависимости частиц:
+$$
+f_{lm} \neq f_l f_m
+$$
+
+Таким образом, установлена степень соответствия уравнению Больцмана для процессов коагуляции в которой имеет место соблюдение 
+законов сохранения в среднем. На основании этого можно сделать вывод, что соблюдение детальной консервативности при моделировании 
+процессов кластерообразования не является необходимым для данного соответствия. Достаточным условием является выполнение в модели 
+консервативности на уровне математического ожидания.
+
